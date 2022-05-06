@@ -1,0 +1,56 @@
+html, * {
+    box-sizing: border-box;
+    background-color: #504a4c;
+}
+#layout {
+    display: grid;
+    grid-template-columns: repeat(5, 70px);
+    grid-template-rows: repeat(6, 70px);
+    justify-content: center;
+    row-gap: 0.5em;
+    column-gap: 0.5em;
+    margin: 5% 0;
+}
+#layout input {
+    width: 70px;
+    height: 70px;
+    padding: 0;
+    font-size: 3em;
+    text-align: center;
+    border-radius: 10px;
+    font-family: 'Libre Baskerville', serif;
+    color: rgba(240, 248, 255, 0.877);
+    background-color: #3b3a3a;
+    border: 0.1px solid #3b3a3a;
+    transition: transform 0.15s;
+}
+#layout input:focus{
+    outline: none;
+    caret-color: transparent;
+}
+#player-won {
+    font-size: 2.5em;
+    text-align: center;
+    color: rgb(30, 210, 39);
+    display: none;
+}
+#player-lost {
+    text-align: center;
+    font-size: 2.5em;
+    color: rgb(3, 3, 3);
+    display: none;
+}
+#show-answer {
+    display: none;
+    text-align: center;
+    color: black;  
+    font-size: 2.5em;
+}
+#inv-box {
+    position: absolute;
+    outline: none;
+    caret-color: transparent;
+    border: none;
+    top: 100%;
+    right: 100%;
+}

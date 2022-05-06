@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="novo_cadastro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav><ul>
+            <li id="auto"><a href="../menu.html">&#9668; Menu Principal</a></li>
+            <li><a href="../mostrar_cadastros/mostrar_cadastros.html">Cadastros &#9658;</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form>
+            <fieldset>
+                <h1>Cadastrar funcionário</h1>
+                <ul>
+                    <li><label for="nome">Nome completo <br><input type="text" id="nome" name="nome" required placeholder="Ex: Yuri Rocha de Albuquerque"></label></li>
+                    <p class="invalid-item" id="invalid-name">Nome inválido. Por favor, cheque novamente o nome.</p>
+                    <p class="invalid-item" id="invalid-lastname">Por favor, informe, pelo menos, o sobrenome.</p>
+                    <li><label for="email">Email <br><input type="email" id="email" name="email" required placeholder="Ex: yuri.albuquerque96@gmail.com"></label></li>
+                    <p class="invalid-item" id="invalid-email">Email inválido. Por favor, cheque novamente o email.</p>
+                    <div>
+                        <ul>
+                            <li><label for="idade">Ano de Nasc. <br><input type="text" id="idade" name="idade" required placeholder="AAAA" maxlength="4"></label>
+                            <p class="invalid-item" id="invalid-age">Ano de nascimento inválido.</p></li>
+                            <li><label for="funcao">Função <br> <input type="text" id="funcao" name="funcao" required placeholder="Ex: Recepcionista" list="listafuncoes">
+                            <datalist id="listafuncoes">
+                                <option value="Eng. de produção">
+                                <option value="Faxineiro"></option>
+                                <option value="Recepcionista"></option>
+                                <option value="Administrador"></option>
+                                <option value="Gerente de T.I."></option>
+                                <option value="Assist. técnico"></option>
+                                <option value="Programador"></option>
+                                <option value="Anls. de sist."></option>
+                                <option value="Anls. de risco"></option>
+                            </datalist>
+                        </label>
+                        <p class="invalid-item" id="invalid-function">Função inválida.</p>
+                        </li>
+                        </ul>
+                    </div>
+                </ul>
+                <button type="button" onclick="checkFormu()"> Concluído </button>
+                <p style="color: green; margin-top: -1em; display: none; font-size: 1.2em;" id="form-completed">Funcionário registrado.</p>
+            </fieldset>
+        </form>
+    </main>
+<script src="../index.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+html, * {
+    box-sizing: border-box;
+    list-style: none;
+}
+body {
+    display: flex;
+    background-color: rgb(236, 236, 236);
+    margin: 0;
+    font-family: 'Abel', sans-serif;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+/* header / nav */
+nav {
+    margin: 0;
+    background-color: rgb(5, 21, 107);
+}
+nav p{
+    font-size: 3em;
+    padding: 0.3em;
+    margin: 0;
+    text-align: center;
+    color: aliceblue;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* main */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#greetings {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    text-align: center;
+    border: 0.5px solid rgb(58, 57, 57);
+    width: max-content;
+    border-radius: 15px;
+    box-shadow: 5px 4px 15px black;
+    height: 450px;
+    width: 390px;
+    justify-content: center;
+    align-items: center;
+}
+#greetings p {
+    font-size: 3em;
+
+}
+#greetings li a {
+    color: black;
+    position: relative;
+    text-decoration: none;
+    font-size: 1.5em;
+    border: 0.5px solid rgb(58, 57, 57);
+    border-radius: 10px;
+    padding: 0.7em;
+    transition: top 0.5s, color 0.2s, background-color 0.2s;
+}
+#greetings li {
+    margin: 1em;
+    padding: 0.5em;
+}
+#greetings li a:visited {
+    color: black;
+}
+#greetings li a:hover {
+    color: aliceblue;
+    background-color: rgb(5, 21, 107);
+    border: 1px solid rgb(5, 21, 107);
+}
+#greetings li a:active {
+    top: 6px;
+}
+
+/* footer */
+footer {
+    display: flex;
+    background-color: rgb(75, 72, 72);
+    margin: 0;
+    height: max-content;
+    flex-direction: column;
+    justify-content: space-between;
+}
+footer ul {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding-top: 0.2em;
+}
+footer ul li{
+    margin: 0.2em;
+}
+footer ul li a {
+    display: block;
+}
+footer ul li a svg {
+    transition: transform 0.2s;
+}
+footer ul a svg:hover {
+    transform: scale(1.3);
+}
+footer p {
+    text-align: center;
+    font-size: 1.3em;
+    margin: 0;
+    padding-bottom: 0.2em;
+}

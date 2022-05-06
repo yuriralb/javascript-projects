@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+    <title>Wordle by Yuri Alb.</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            background-color: #504a4c;
+            margin: 0;
+        }
+        @media screen and (max-width: 768px){
+                #layout {
+                display: grid;
+                grid-template-columns: repeat(5, 60px);
+                grid-template-rows: repeat(6, 60px);
+                justify-content: center;
+                row-gap: 0.3em;
+                column-gap: 0.3em;
+                margin: 5% 0;
+            }
+                #layout input {
+                width: 60px;
+                height: 60px; 
+                font-size: 2em;
+            }
+        }
+        @media screen and (min-width: 769px){
+                #layout {
+                display: grid;
+                grid-template-columns: repeat(5, 70px);
+                grid-template-rows: repeat(6, 70px);
+                justify-content: center;
+                row-gap: 0.5em;
+                column-gap: 0.5em;
+                margin: 5% 0;
+            }
+                #layout input {
+                width: 70px;
+                height: 70px;
+                font-size: 3em;;
+            }
+        }
+        #layout {
+            margin-top: 15px;
+            z-index: 1;
+        }
+        #layout input {
+            padding: 0;
+            text-align: center;
+            border-radius: 10px;
+            font-family: 'Libre Baskerville', serif;
+            color: rgba(240, 248, 255, 0.877);
+            background-color: #3b3a3a;
+            border: 0.1px solid #3b3a3a;
+            transition: transform 0.15s;
+        }
+        #layout input:focus{
+            caret-color: transparent;
+            outline: 1px solid red;
+        }
+        #player-won {
+            font-size: 2.5em;
+            text-align: center;
+            color: rgb(30, 210, 39);
+            display: none;
+        }
+        #player-lost {
+            text-align: center;
+            font-size: 2.5em;
+            color: rgb(3, 3, 3);
+            display: none;
+        }
+        #show-answer {
+            display: none;
+            text-align: center;
+            color: black;  
+            font-size: 2.5em;
+        }
+        #inv-box {
+            position: absolute;
+            outline: none;
+            caret-color: transparent;
+            border: none;
+            top: 100%;
+            right: 100%;
+        }
+        #keyboard {
+            margin: 1.5em;
+            margin-top: 0em;
+            justify-content: center;
+            align-items: center;
+        }
+        #line1, #line2 {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: 70px;
+            grid-column-gap: 3px;
+            justify-content: center;
+            align-content: center;
+            max-width: 700px;
+        }
+        #line3 {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr) 100px;
+            grid-template-rows: 70px;
+            grid-column-gap: 3px;
+            justify-content: center;
+            align-content: center;
+            max-width: 700px;
+        }
+        #keyboard a {
+            font-family: 'Libre Baskerville', serif;
+            text-decoration: none;
+            font-size: 1.5em;
+            margin: 0%;
+            color: white;
+            background-color: #332e30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        #game-end {
+            font-size: 3.5em;
+            text-align: center;
+            position: absolute;
+            top: 2%;
+            z-index: 2;
+            display: none;
+            transition: display 3s;
+            background-color: rgb(165, 177, 177);
+            width: 380px;
+            height: 400px;
+            opacity: 1;
+            border-radius: 8px;
+        }
+        #game-end ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #blank{
+            margin-right: auto;
+        }
+        #close-window {
+            font-size: 2.5rem;
+            padding: 0;
+            margin-right: 10px;
+        }
+        header {
+            text-align: center;
+            background-color: rgba(61, 32, 32, 0.842);
+            width: 100%;
+        }
+        header p {
+            font-weight: 200;
+            font-size: 1.4em;
+        }
+    </style>
+</head>
+<body id="body">
+    <main style="display: flex; flex-direction: column; align-items: center;" >
+        <header>
+            <p>Yuri Albuquerque's wordle version <br>
+            <em>*This project was created only to test my knowledge of web game development.</em></p>
+        </header>
+    <div id="layout">
+        <label for=""><input type="button" maxlength="0" id="box-l1-0" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l1-1" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l1-2" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l1-3" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l1-4" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l2-0" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l2-1" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l2-2" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l2-3" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l2-4" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l3-0" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l3-1" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l3-2" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l3-3" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l3-4" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l4-0" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l4-1" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l4-2" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l4-3" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l4-4" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l5-0" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l5-1" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l5-2" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l5-3" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l5-4" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l6-0" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l6-1" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l6-2" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l6-3" ></label>
+        <label for=""><input type="button" maxlength="0" id="box-l6-4" ></label>
+    </div>
+    <div id="game-end">
+        <ul>
+        <li id="blank"></li>
+        <li id="close-window" onclick="closeW()">X</li>
+        </ul>
+    </div>
+    </main>
+    <label for=""><input type="text" maxlength="0" id="inv-box"></label>
+    <div id="keyboard" style="display: flex; flex-direction: column; align-items: center;">
+        <div id="line1" style="width: 100%; height: 90px;">
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">Q</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">W</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">E</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">R</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">T</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">Y</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">U</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">I</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">O</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">P</a>
+        </div>
+        <div id="line2" style="width: 100%; height: 90px; margin-left: 1.5em;">
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">A</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">S</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">D</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">F</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">G</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">H</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">J</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">K</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">L</a>
+            <a id="backspace" style="font-size: 1.5em;" onclick="getLetter(this)" href="#keyboard">⌫</a>
+        </div>
+        <div id="line3" style="width: 100%; height: 90px; margin-left: 2.5em;">
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">Z</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">X</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">C</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">V</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">B</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">N</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">M</a>
+            <a class="parag" onclick="getLetter(this)" href="#keyboard">Enter</a>
+        </div>
+    </div>
+    <script>
+            let guess = ''
+            let count = 0
+            let countInput = 0
+            const gameEnd = document.getElementById('game-end')
+            let hasWon = false
+            const layoutEl = document.getElementById('layout')
+            const answers = ['ábaco', 'abadá', 'abrir', 'ácaro', 'achar', 'ácido', 'açude', 'adaga', 'adega', 'adiar', 'adubo', 'afiar', 'agogo', 'aguar', 'águia', 'aipim', 'alado', 'álbum', 'amigo', 'amora', 'andar', 'anzol', 'apito', 'araça', 'arara', 'aratu', 'arder', 'areia', 'arpão', 'arroz', 'assar', 'atobá', 'átomo', 'atrás', 'aveia', 'avelã', 'avião', 'axila', 'azedo', 'babar', 'bacia', 'bacon', 'bagre', 'balão', 'balde', 'balsa', 'bambu', 'banco', 'banda', 'bando', 'banho', 'banjo', 'barba', 'barco', 'barro', 'bater', 'batom', 'bauru', 'beber', 'berço', 'betta', 'bicar', 'bisão', 'bloco', 'blusa', 'boate', 'bocal', 'bócio', 'boiar', 'boina', 'bolha', 'bolsa', 'bolso', 'bomba', 'bonde', 'bongô', 'botão', 'braço', 'bravo', 'brega', 'broca', 'bruxa', 'bucha', 'buquê', 'burca', 'cabra', 'cação', 'caçar', 'cacau', 'cacho', 'cacto', 'caído', 'caixa', 'calar', 'calau', 'calça', 'calmo', 'calor', 'canga', 'canil', 'canoa', 'canto', 'capim', 'capuz', 'caqui', 'carga', 'carne', 'carpa', 'carro', 'carta', 'casar', 'casca', 'caspa', 'caule', 'cavar', 'cerca', 'cervo', 'cesta', 'cetro', 'chalé', 'chato', 'chave', 'chefe', 'cheio', 'chopp', 'chulé', 'chuva', 'cidra', 'cinto', 'circo', 'cisco', 'cisne', 'clara', 'claro', 'clava', 'clube', 'coala', 'cobra', 'cocar', 'coçar', 'cofre', 'coifa', 'colar', 'comer', 'conga', 'cópia', 'corda', 'coroa', 'corvo', 'couve', 'craca', 'cravo', 'crepe', 'crina', 'cueca', 'cuíca', 'cupim', 'curar', 'curau', 'curió', 'curry', 'curto', 'curva', 'cutia', 'damas', 'dardo', 'dedal', 'dente', 'dingo', 'disco', 'dócil', 'doido', 'domar', 'draga', 'ducha', 'ebola', 'esqui', 'facão', 'fácil', 'faixa', 'falar', 'falir', 'faraó', 'farda', 'farol', 'farto', 'fatal', 'fatia', 'fauna', 'febre', 'feliz', 'fêmur', 'fênix', 'ferir', 'feroz', 'festa', 'filha', 'filho', 'fogão', 'foice', 'folha', 'forma', 'forno', 'forte', 'fraco', 'frear', 'frito', 'frota', 'fugir', 'fundo', 'funil', 'furão', 'furar', 'fuzil', 'gaita', 'galho', 'gamão', 'gambá', 'ganso', 'ganzá', 'garça', 'garfo', 'garoa', 'garra', 'gênio', 'gesso', 'gibão', 'glacê', 'globo', 'gloss', 'gnomo', 'golfe', 'gongo', 'gorro', 'grade', 'grilo', 'gripe', 'guará', 'guiar', 'harpa', 'herói', 'hiena', 'horta', 'hotel', 'iaque', 'índio', 'irara', 'vidro']
+            const answer = answers[getRandomNumber()].toLocaleUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            const boxl1_0 = document.getElementById('box-l1-0'), boxl2_0 = document.getElementById('box-l2-0'), boxl3_0 = document.getElementById('box-l3-0'), boxl4_0 = document.getElementById('box-l4-0'), boxl5_0 = document.getElementById('box-l5-0'), boxl6_0 = document.getElementById('box-l6-0')
+            const boxl1_1 = document.getElementById('box-l1-1'), boxl2_1 = document.getElementById('box-l2-1'), boxl3_1 = document.getElementById('box-l3-1'), boxl4_1 = document.getElementById('box-l4-1'), boxl5_1 = document.getElementById('box-l5-1'), boxl6_1 = document.getElementById('box-l6-1')
+            const boxl1_2 = document.getElementById('box-l1-2'), boxl2_2 = document.getElementById('box-l2-2'), boxl3_2 = document.getElementById('box-l3-2'), boxl4_2 = document.getElementById('box-l4-2'), boxl5_2 = document.getElementById('box-l5-2'), boxl6_2 = document.getElementById('box-l6-2')
+            const boxl1_3 = document.getElementById('box-l1-3'), boxl2_3 = document.getElementById('box-l2-3'), boxl3_3 = document.getElementById('box-l3-3'), boxl4_3 = document.getElementById('box-l4-3'), boxl5_3 = document.getElementById('box-l5-3'), boxl6_3 = document.getElementById('box-l6-3')
+            const boxl1_4 = document.getElementById('box-l1-4'), boxl2_4 = document.getElementById('box-l2-4'), boxl3_4 = document.getElementById('box-l3-4'), boxl4_4 = document.getElementById('box-l4-4'), boxl5_4 = document.getElementById('box-l5-4'), boxl6_4 = document.getElementById('box-l6-4')
+            const boxesArray = [
+            [boxl1_0, boxl1_1, boxl1_2, boxl1_3, boxl1_4],
+            [boxl2_0, boxl2_1, boxl2_2, boxl2_3, boxl2_4],
+            [boxl3_0, boxl3_1, boxl3_2, boxl3_3, boxl3_4],
+            [boxl4_0, boxl4_1, boxl4_2, boxl4_3, boxl4_4],
+            [boxl5_0, boxl5_1, boxl5_2, boxl5_3, boxl5_4],
+            [boxl6_0, boxl6_1, boxl6_2, boxl6_3, boxl6_4]
+            ]
+
+            //game starts
+            function renderGame() { //setting boxes styles
+                for (let i = 0; i < 5; i++) {
+                    boxesArray[count][i].setAttribute('maxlength', '1')
+                    boxesArray[count][i].style.backgroundColor = 'inherit'
+                    boxesArray[count][i].style.border = 'solid 2px #272727e8'
+                    boxesArray[count][i].setAttribute('onclick', `modifyBox(this, ${i})`)
+                }
+            }
+
+            renderGame()
+
+            document.addEventListener('keydown', (event) => { //collect letters typed
+                let letterTypedPc = event.key;
+                getLettersTyped(letterTypedPc)
+            }, false);
+
+            function isTheAnswer(word) { //cheking guess
+                let lettersArray = []
+                let filteredWord = ''
+                let wordArray = word.split('')
+                let answerArray = answer.split('')
+                if (word === answer) {
+                    hasWon = true
+                }
+                for (c = 0; c < 5; c++) { // 1: finding green ones
+                    if (word[c] === answer[c]) {
+                        lettersArray.push({
+                            letter:word[c],
+                            backColor:'#3aa394', //green
+                            index:c
+                        })
+                        answerArray[c] = '$' // making the remaining letters have the same index as before
+                        wordArray[c] = '%' // making the remaining letters have the same index as before
+                    }
+                }
+                filteredWord = wordArray.join('')
+                for (i = 0; i < answerArray.length; i++) { //finding black and yellow ones
+                    if (answerArray.indexOf(filteredWord[i]) != -1 && filteredWord[i] != '%') {
+                        for (let j = 0; j < answerArray.length; j++) {
+                            if (filteredWord[i] === answerArray[j]) {
+                                lettersArray.push({
+                                    letter:filteredWord[i],
+                                    backColor:'#d3ad69', //yellow
+                                    index:i
+                                })
+                                answerArray[j] = '$'
+                                break
+                            }
+                        }
+                    } else if (answerArray.indexOf(filteredWord[i]) === -1 && filteredWord[i] != '%'){
+                        lettersArray.push({
+                            letter:filteredWord[i],
+                            backColor:'#312a2c', //black
+                            index:i
+                        })
+                    }
+                }
+                changeBackground(lettersArray)
+            }
+
+            function changeBackground(arr) { //set box backgroundColor (yellow/green/black)
+                colorsArray = ['','','','','']
+                for (let i = 0; i < arr.length; i++) {
+                    if (colorsArray[arr[i].index] === '' || colorsArray[arr[i].index] === '#d3ad69') {
+                        colorsArray[arr[i].index] = arr[i].backColor
+                    }
+                }
+                for (let j = 0; j < 5; j++) {
+                    boxesArray[count][j].style.backgroundColor = colorsArray[j]
+                    boxesArray[count][j].style.border = colorsArray[j]
+                    boxesArray[count][j].setAttribute('readonly', 'readonly')
+                    boxesArray[count][j].removeAttribute('onclick')
+                }
+                if (hasWon) {
+                    gameEnd.innerHTML += `
+                                            <p>
+                                            PARABÉNS! VOCÊ VENCEU! 😎
+                                            </p>`
+                    gameEnd.style.display = 'block'
+                }
+                count += 1
+                if (count === 6 && hasWon === false) {
+                    gameEnd.innerHTML += `  
+                                                <p>
+                                                VOCÊ PERDEU! QUE PENA... 😭
+                                                A palavra secreta era: ${answer}
+                                                </p>`
+                    gameEnd.style.fontSize = '3em'
+                    gameEnd.style.display = 'block'
+                }
+            }
+            function getRandomNumber() {
+            return Math.floor(Math.random()*answers.length + 1)
+            }
+
+            function modifyBox(element, num) {
+                countInput = num
+                // document.getElementById("inv-box").focus()
+            }
+
+            function nextBox(actualBox) { //get the next index
+                if (actualBox === 4) {
+                    for (let i = 0; i < 5; i++) {
+                        if (boxesArray[count][i].value === '') {
+                            return i
+                        }
+                    }
+                } else {
+                    for (let i = actualBox; i < 5; i++) {
+                        if (boxesArray[count][i].value === '') {
+                            return i
+                        }
+                    }
+                }
+                return countInput
+            } 
+
+            function sleep(ms) { //animation stuff
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            async function animation(element) { //box animation
+                element.style.transform = 'scale(1.3)'
+                await sleep(0.1 * 1000)
+                element.style.transform = 'scale(1)'
+            }
+            function getLetter(elem) {
+                let letterTypedMobile = ''
+                if (elem.textContent === '⌫') {
+                    letterTypedMobile = 'Backspace'
+                } else {
+                    letterTypedMobile = elem.textContent
+                }
+                getLettersTyped(letterTypedMobile)
+            }
+            function getLettersTyped(keyPressed) {
+                if (keyPressed != 'Enter' && keyPressed != 'Backspace' && keyPressed.length > 1) {
+                    keyPressed = ''
+                } else if (keyPressed === 'Enter') {
+                    guess = (boxesArray[count][0].value + boxesArray[count][1].value + boxesArray[count][2].value + boxesArray[count][3].value + boxesArray[count][4].value).toLocaleUpperCase()
+                    if (guess.length = 5) {
+                        isTheAnswer(guess)
+                        countInput = 0
+                        if (hasWon === false) {
+                            renderGame()
+                        }
+                    }
+                } else if (keyPressed === 'Backspace' && hasWon === false) {
+                    if (boxesArray[count][countInput].value != '') {
+                        boxesArray[count][countInput].value = ''
+                    } else {
+                        if (countInput > 0) {
+                            countInput -= 1
+                        }
+                        boxesArray[count][countInput].value = ''
+                    }
+                } else if (/[a-z]/i.test(keyPressed) && hasWon === false) { //letters become input values
+                    if (boxesArray[count][countInput].value === '') {
+                        boxesArray[count][countInput].value = keyPressed.toUpperCase()
+                        animation(boxesArray[count][countInput])
+                        countInput = nextBox(countInput)
+                    }
+                }
+            }
+            function closeW() {
+                gameEnd.style.display = 'none'
+            }
+    </script>
+</body>
+</html>

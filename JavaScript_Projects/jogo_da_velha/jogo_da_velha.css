@@ -1,0 +1,60 @@
+*, html {
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+#center {
+    height: 950px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#jogo-da-velha {
+    display: grid;
+    grid-template-columns: 200px 5px 200px 5px 200px;
+    grid-template-rows: 200px 5px 200px 5px 200px;
+}
+div {
+    margin: 0;
+}
+#line1 {
+    grid-area: 1 / 2 / 6 / 3;
+    background-color: black;
+}
+#line2 {
+    grid-area: 1 / 4 / 6 / 5;
+    background-color: black;
+}
+#line3 {
+    grid-area: 2 / 1 / 3 / 6;
+    background-color: black;
+}
+#line4 {
+    grid-area: 4 / 1 / 5 / 6;
+    background-color: black;
+}
+button {
+    border: none;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-image: none;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: rgb(224, 221, 221);
+}
+button:active {
+    background-color: rgb(184, 181, 181);
+}
+p {
+    font-size: 2.5em;
+    margin-bottom: 1.3em;
+    color: black
+}
+#winner {
+    margin-top: 1.3em;
+    font-size: 3.5em;
+    color: rgb(132, 1, 255);
+}

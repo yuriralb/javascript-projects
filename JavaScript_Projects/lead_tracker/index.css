@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    list-style: none;
+}
+body {
+    min-width: 400px;
+}
+button {
+    display: inline;
+    margin: 0.2em;
+    width: 160px;
+    height: 48px;
+    font-size: 1.2em;
+    font-weight: 700;
+    background-color: #5f9341;
+    border: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+input {
+    margin: 0.2em;
+    width: 100%;
+    padding: 0.7em;
+    border: solid 1px #5f9341;
+}
+input:focus{
+    border: solid 1px rgb(48, 153, 48);
+    background-color: rgba(126, 172, 233, 0.3);  
+}
+fieldset {
+    width: 100%;
+}
+li a {
+    color: #5f9341;
+    margin: 0;
+}
+ul {
+    padding-left: 6px;
+}
+li {
+    margin-top: 5px;
+}
+#delete-btn {
+    color: #5f9341;
+    background-color: white;
+    border: #5f9341 1px solid;
+}

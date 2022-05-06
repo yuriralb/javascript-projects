@@ -1,0 +1,88 @@
+html, * {
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Abel', sans-serif;
+} 
+body {
+    margin: 0;
+}
+
+/* header */
+header {
+    min-width: 1060px;
+    background-color: rgb(5, 21, 107);
+}
+header nav ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    color: aliceblue;
+}
+header nav ul li a {
+    margin: 0.5em;
+    text-decoration: none;
+    display: block;
+    font-size: 1.5em;
+    padding: 0.5em;
+    border: 1px aliceblue solid;
+    border-radius: 50px;
+    transition: background-color 0.2s;
+}
+header nav ul li a:visited {
+    color: aliceblue;
+}
+header nav ul li a:hover {
+    color: rgb(5, 21, 107);
+    background-color: aliceblue;
+}
+#auto {
+    margin-right: auto;
+}
+
+/* main */
+#layout {
+    margin: 5em 5em;
+}
+.modelo {
+    text-align: center;
+    font-size: 1.3em;
+    display: grid;
+    min-height: 50px;
+    min-width: 980px;
+    grid-template-columns: 2fr 2fr 1fr 0.5fr 0.3fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    
+}
+.modelo p, a {
+	padding: 0.4em;
+	margin: 0;
+    border-bottom: 1px solid black;
+    box-shadow: 2px 2px 10px black;
+    text-decoration: none;
+}
+#guia {
+    font-size: 1.5em;
+    color: aliceblue;
+    background-color: rgb(5, 21, 107);
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+#guia p {
+    border: none;
+    box-shadow: none;
+}
+#excluir-funcionario {
+	font-size: 1.2em;
+	padding: 0.25em;
+    background-color: rgb(194, 40, 40);
+    display: block;
+}
+#excluir-funcionario:active {
+    color: black;
+    background-color: brown;
+}
+#excluir-funcionario:visited {
+    color: black;
+}
