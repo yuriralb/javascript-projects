@@ -2112,5 +2112,23 @@
     "raquete elétrica",
     "secador de cabelo",
     "torta de maracujá",
-    "tubarão-martelo"]
+    "tubarão-martelo"],
+	"l16": ["abridor de garrafa","antena parabólica","apontador de lápis","assistente social","bolo de brigadeiro","cachorro-vinagre","cadeira de balanço",
+		"cadeira elétrica","carrinho de rolimã","cartão telefônico","chapinha de cabelo","cinto de segurança","coração de galinha","corrida de cavalos",
+		"cuidador de idosos","curvador de cílios","dança das cadeiras","detector de fumaça","detector de metais","dragão-de-komodo","esfigmomanômetro",
+		"espremedor de alho","estatueta do oscar","fogos de artifício","futebol americano","jogador de futebol","liquidificador","máquina de costura",
+		"marcador de página","máscara cirúrgica","mousse de maracujá","nado sincronizado","rolinho primavera","ventilador de teto"],
+	"l17": ["bolinho de bacalhau","bolo de aniversário","caixa registradora","cirurgião plástico","comissária de bordo","couve-de-bruxelas","depilador elétrico",
+		"diabo-da-tasmânia","entregador de pizza","escorpião-vinagre","estojo de maquiagem","frango à parmegiana","frango à passarinho","gelatina de morango",
+		"lançamento de dardo","lançamento de disco","máscara de mergulho","máscara de oxigênio","mico-leão-dourado","mousse de chocolate","palácio do planalto"
+		,"perfurador de papel","prendedor de cabelo","protetor auricular","saída de emergência","sorvete napolitano","usina hidrelétrica"],
+	"l18": ["abóbora jacarezinho","caixa de ferramentas","chocolate granulado","engenheiro mecânico","escorredor de pratos","espremedor de frutas",
+		"estátua da liberdade","esteira ergométrica","extintor de incêndio","ferro de passar roupa","ginástica artística","leopardo-das-neves",
+		"máquina fotográfica","multiprocessador","muro das lamentações","porquinho-da-índia","praça de alimentação","tubarão-enfermeiro"],
+	"l19": ["aparelho ortodôntico","besouro-rinoceronte","carregador de celular","carrinho de bate-bate","chapéu de aniversário","lançamento de martelo","macarrão instantâneo",
+		"máquina de lavar louça","máquina de lavar roupa"],
+	"l20": ["aranha-caranguejeira","bicicleta ergométrica","certidão de nascimento","escorredor de macarrão","rato-toupeira-pelado"],
+	"l21": ["caranguejo-violinista", "engenheiro de alimentos", "máquina de datilografar"],
+	"l22": ["auxiliar administrativo", "cegonha-bico-de-sapato"],
+	"l24": ["caranguejo-dos-coqueiros"]
 }
